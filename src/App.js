@@ -1,13 +1,21 @@
 import './App.css';
-import NavBar from './components/NavBar';
+import NavBar from './components/Header/NavBar';
+import ItemListContainer from './components/ItemListContainer';
+ 
+
 
 const  App = () => {
+
+  const titulo= "Las mejores zapatillas Joordan!!!";
+  const greeting = "Bienvenidos a nuestra Tienda"
+
+
   return (
     <>
-      <header>
-        <NavBar/>
-        <h1>Bienvenidos</h1>
-      </header>
+      <NavBar titulo={titulo}/>
+      <div className="App">
+      <ItemListContainer greeting={greeting}/>
+      </div>
     </>
   );
 }
