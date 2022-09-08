@@ -2,7 +2,9 @@ import React from "react";
 import { ShoppingCart } from "@mui/icons-material";
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { Badge } from "@mui/material";
+import Badge from '@mui/material/Badge';
+
+
 
 const CartWidget = () => {
     return (
@@ -10,9 +12,9 @@ const CartWidget = () => {
         <Button variant="outlined">LogIn
         </Button>
         <IconButton >
-            <Badge color="secondary">
-                <ShoppingCart fontSize="large" />
-            </Badge>
+            <Badge badgeContent={0} color="secondary">
+              <ShoppingCart />
+             </Badge>
         </IconButton>
     </div>
         

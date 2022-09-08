@@ -1,7 +1,6 @@
 import './App.css';
 import NavBar from './components/Header/NavBar';
 import ItemListContainer from './components/ItemListContainer';
- 
 
 
 const  App = () => {
