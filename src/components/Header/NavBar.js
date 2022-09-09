@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import CartWidget from "./CartWidget";
+import Container from '@mui/material/Container';
 
 
 const navItems = [
@@ -18,7 +19,6 @@ const navItems = [
 const styles = {
     root: {
         flexGrow: 1,
-        marginBottom: "5rem",
     },
 
     appBar: {
@@ -50,6 +50,7 @@ export default function NavBar({ titulo }) {
 
     return (
         <AppBar position="static" style={styles.appBar}>
+           <Container maxWidth="xl"> 
             <Toolbar style={styles.toolbar}>
                 <IconButton edge="start" style={styles.menuButton} color="inherit" aria-label="menu">
                     <img style={styles.img} src={logojordan} alt="jordan" title="HOME" />
@@ -67,7 +68,9 @@ export default function NavBar({ titulo }) {
                 </Box>
                 <CartWidget />
             </Toolbar>
+            </Container>
         </AppBar>
+       
     )
 }
 
