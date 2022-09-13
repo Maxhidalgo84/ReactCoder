@@ -15,15 +15,14 @@ const MySwal = withReactContent(Swal)
 
 const ItemListContainer = ({greeting}) => {
 
-    const [products, setProducts] = useState([]);
+    const [listproducts, setListProducts] = useState([]);
     const [show, setShow] = useState(false);
    
     useEffect(() => {
         let timer = setTimeout(() => {
                     setShow(true)
                     promesa
-                    .then((res)=>{setProducts(res)})
-                    .catch(()=>console.log("no cargo"));
+                    .then((res)=>{setListProducts(res)})
             },2000);
        
         return () => clearTimeout(timer)
@@ -43,7 +42,7 @@ const ItemListContainer = ({greeting}) => {
 
             <h1 style={styles.h1}>{greeting}</h1>
             <ItemCount initial={1} stock={10} onAdd={onAdd}/>
-            {show? <ItemList style={styles.root} products={products}/>: <CircularProgress sx={{ margin: "10% auto", display:"flex", alignItems:"center",  justifyContent:"center"}} />}
+            {show? <ItemList style={styles.root} listproducts={listproducts}/>: <CircularProgress sx={{ margin: "10% auto", display:"flex", alignItems:"center",  justifyContent:"center"}} />}
         </>
         )
 }
