@@ -57,7 +57,7 @@ export default function Item({ producto: { id, title, imagen, price, description
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton title="Añadir al carrito" aria-label="add to favorites">
+                <IconButton title="Añadir al carrito">
 
                     <AddShoppingCart />
                 </IconButton>
