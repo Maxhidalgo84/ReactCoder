@@ -22,13 +22,12 @@ const ItemCount = ({ initial, stock, onAdd }) => {
 
 
     return (
-        <Container sx={{textAlign:"center", m:"20px auto"}}>
+        <Container sx={{textAlign:"center"}}>
             <div style={styles.shop}>
-                <h2>Zapatilla</h2>
                 <Box style={styles.shop2} sx={{ width: "90%", margin: "20px auto", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <AddIcon color="primary" onClick={sumar} />
-                    <p>{contador}</p>
                     <RemoveIcon color="primary" onClick={restar} />
+                    <p>{contador}</p>
+                    <AddIcon color="primary" onClick={sumar} />
                 </Box>
             </div>
             <Button variant="contained" color="primary" onClick={agregarCarrito}>Agregar al carrito</Button>
@@ -39,9 +38,7 @@ const ItemCount = ({ initial, stock, onAdd }) => {
 const styles = {
     shop: {
         textAlign:"center",
-        margin: "auto",
-        width: 300,
-        height: 100,
+        margin: "0 auto",
         background: "#e7e7e7",
     },
 

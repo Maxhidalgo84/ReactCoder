@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from "react";
-import ItemCount from "./ItemCount";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import productos from "./Productos/ProducData";
@@ -29,19 +28,11 @@ const ItemListContainer = ({greeting}) => {
         }, []);
         
 
-    const onAdd = (count) =>{
-        MySwal.fire({
-            title: "Listo!",
-            text: `Se agregan ${count} al carrito`,
-        });
-    } 
-
-
     return (
         <> 
 
             <h1 style={styles.h1}>{greeting}</h1>
-            <ItemCount initial={1} stock={10} onAdd={onAdd}/>
+            {/* <ItemCount initial={1} stock={10} onAdd={onAdd}/> */}
             {show? <ItemList style={styles.root} listproducts={listproducts}/>: <CircularProgress sx={{ margin: "10% auto", display:"flex", alignItems:"center",  justifyContent:"center"}} />}
         </>
         )
