@@ -67,7 +67,7 @@
                     price:27000,
                     categoria:"zapatillas",
     },
-/*     {
+    {
         id:6,
         title: "Jordan Jumpman",
         imagen1:"https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/c02bdaa2-95fa-4c35-a7d3-20a5ca97677c/playera-de-manga-corta-jordan-jumpman-qwkX7c.png",
@@ -191,14 +191,14 @@
     {
         id:17,
         title: "Mochila Engineered",
-        imagen:"https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/6d9783a6-336a-4ddc-b712-90cb0c1c52c1/mochila-jordan-23-engineered-8mjbz9.png",
+        imagen1:"https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/6d9783a6-336a-4ddc-b712-90cb0c1c52c1/mochila-jordan-23-engineered-8mjbz9.png",
         imagen2:"https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/7754cda8-f01a-46fa-b10a-891d52db4242/mochila-jordan-23-engineered-8mjbz9.png",
         imagen3:"https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5,q_80/9e71cf69-ed0e-442b-a3d2-7104e9471e0a/mochila-jordan-23-engineered-8mjbz9.png",
         description1:"Jordan 23 Engineered",
         description2:"La mochila Jordan cuenta con soluciones de almacenamiento dondequiera que busques. Creamos un compartimiento exclusivo para calzado así puedes mantener tu equipo separado. El bolsillo con cierre superior cuenta con un forro que brinda una sensación de suavidad para mantener tus objetos de valor amortiguados y seguros cuando estás en movimiento.",
         price: 15000,
         categoria:"mochilas",
-    }, */
+    }, 
 
 ]
 
