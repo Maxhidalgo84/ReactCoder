@@ -14,13 +14,13 @@ export const ItemDetailContainer = () => {
     const [listproduct, setListProduct] = useState({});
     const [show, setShow] = useState(false);
 
-    const {id} = useParams();
+    const { id } = useParams();
 
     useEffect(() => {
         let timer = setTimeout(() => {
             setShow(true)
             promesa
-                .then((res) => { setListProduct(res.find(item => item.id === parseInt(id)))})
+                .then((res) => { setListProduct(res.find(item => item.id === parseInt(id))) })
         }, 1000);
 
         return () => clearTimeout(timer)

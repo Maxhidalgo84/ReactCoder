@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Box} from '@mui/material'
+import { Container, Box } from '@mui/material'
 import styled from '@emotion/styled';
 import ItemCount from '../ItemCount';
 import Swal from 'sweetalert2'
@@ -9,39 +9,33 @@ const MySwal = withReactContent(Swal)
 
 
 
-export const ItemDetail = ({listproduct}) => {
+export const ItemDetail = ({ listproduct }) => {
 
-    const onAdd = (count) =>{
-        MySwal.fire({
-            title: "Listo!",
-            text: `Se agregan ${count} al carrito`,
-        });
-    } 
+  const onAdd = (count) => {
+    MySwal.fire({
+      title: "Listo!",
+      text: `Se agregan ${count} al carrito`,
+    });
+  }
 
 
-    return (
-        <Container sx={{ padding: 5, display:"flex", textAlign:"center"}}>
-           <Box sx={{ width: 600, height:300}}>
-          <Image src={listproduct.imagen1}/>
-          <Image src={listproduct.imagen2}/>
-          <Image src={listproduct.imagen3}/>
-        </Box>
-        <Box sx={{ flex: 1, padding: "0px 50px"}}>
-          <Title>{listproduct.title}</Title>
-          <Desc>
-            {listproduct.description2}
-          </Desc>
-          <Price>Precio: ${listproduct.price}</Price>
-          <FilterContainer>
-            {/* <Filter>
-              <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
-            </Filter> */}
-            <Filter>
-              <FilterTitle>Talle</FilterTitle>
-              {listproduct.categoria === "Zapatillas"?
+  return (
+    <Container sx={{ padding: 5, display: "flex", textAlign: "center" }}>
+      <Box sx={{ width: 600, height: 300 }}>
+        <Image src={listproduct.imagen1} />
+        <Image src={listproduct.imagen2} />
+        <Image src={listproduct.imagen3} />
+      </Box>
+      <Box sx={{ flex: 1, padding: "0px 50px" }}>
+        <Title>{listproduct.title}</Title>
+        <Desc>
+          {listproduct.description2}
+        </Desc>
+        <Price>Precio: ${listproduct.price}</Price>
+        <FilterContainer>
+          <Filter>
+            <FilterTitle>Talle</FilterTitle>
+            {listproduct.categoria === "Zapatillas" ?
               <FilterSize>
                 <FilterSizeOption>38</FilterSizeOption>
                 <FilterSizeOption>39</FilterSizeOption>
@@ -53,22 +47,22 @@ export const ItemDetail = ({listproduct}) => {
                 <FilterSizeOption>45</FilterSizeOption>
               </FilterSize> :
               <FilterSize>
-              <FilterSizeOption>S</FilterSizeOption>
-              <FilterSizeOption>M</FilterSizeOption>
-              <FilterSizeOption>L</FilterSizeOption>
-              <FilterSizeOption>XL</FilterSizeOption>
-              <FilterSizeOption>XXL</FilterSizeOption>
-            </FilterSize>
-              }
-            </Filter>
-          </FilterContainer>
-          <Box sx={{ width: "50%", margin:"0 auto"}}>
-            <ItemCount initial={1} stock={10} onAdd={onAdd}/>
-          </Box>
-
+                <FilterSizeOption>S</FilterSizeOption>
+                <FilterSizeOption>M</FilterSizeOption>
+                <FilterSizeOption>L</FilterSizeOption>
+                <FilterSizeOption>XL</FilterSizeOption>
+                <FilterSizeOption>XXL</FilterSizeOption>
+              </FilterSize>
+            }
+          </Filter>
+        </FilterContainer>
+        <Box sx={{ width: "50%", margin: "0 auto" }}>
+          <ItemCount initial={1} stock={10} onAdd={onAdd} />
         </Box>
-        </Container>
-    )
+
+      </Box>
+    </Container>
+  )
 }
 
 

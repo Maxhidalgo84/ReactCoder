@@ -11,9 +11,9 @@ import { Link } from "react-router-dom";
 
 
 const navItems = [
-    { id: 0, nombre: 'Zapatillas', ruta:"/categoria/Zapatillas" },
-    { id: 1, nombre: 'Remeras', ruta:"/categoria/Remeras" },
-    { id: 2, nombre: 'Buzos', ruta:"/categoria/Buzos" },
+    { id: 0, nombre: 'Zapatillas', ruta: "/categoria/Zapatillas" },
+    { id: 1, nombre: 'Remeras', ruta: "/categoria/Remeras" },
+    { id: 2, nombre: 'Buzos', ruta: "/categoria/Buzos" },
 ]
 //const navItems = ['Home', 'Quienes somos', 'Contacto'];
 
@@ -22,27 +22,27 @@ export default function NavBar({ titulo }) {
 
     return (
         <AppBar position="static" style={styles.appBar}>
-           <Container maxWidth="xl"> 
-            <Toolbar style={styles.toolbar}>
-                <IconButton edge="start" style={styles.menuButton} color="inherit" aria-label="menu">
-                    <Link to="/"><img style={styles.img} src={logojordan} alt="jordan" title="HOME" /></Link>
-                </IconButton>
-                <div style={styles.banner}>
-                    {titulo}
+            <Container maxWidth="xl">
+                <Toolbar style={styles.toolbar}>
+                    <IconButton edge="start" style={styles.menuButton} color="inherit" aria-label="menu">
+                        <Link to="/"><img style={styles.img} src={logojordan} alt="jordan" title="HOME" /></Link>
+                    </IconButton>
+                    <div style={styles.banner}>
+                        {titulo}
 
-                </div>
-                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                    {navItems.map((item) => (
-                        <Button key={item.id}>
-                            <Link to={item.ruta} style={styles.link}>{item.nombre}</Link>
-                        </Button>
-                    ))}
-                </Box>
-                <Link to="/cart"><CartWidget /></Link>
-            </Toolbar>
+                    </div>
+                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                        {navItems.map((item) => (
+                            <Button key={item.id}>
+                                <Link to={item.ruta} style={styles.link}>{item.nombre}</Link>
+                            </Button>
+                        ))}
+                    </Box>
+                    <Link to="/cart"><CartWidget /></Link>
+                </Toolbar>
             </Container>
         </AppBar>
-       
+
     )
 }
 
@@ -53,7 +53,7 @@ const styles = {
     },
 
     appBar: {
-       
+
         borderBottom: "1px solid",
         borderBottomColor: "black",
         backgroundColor: "white",
@@ -77,7 +77,7 @@ const styles = {
     },
 
     link: {
-        color:"black",
-        textDecoration:"none",
+        color: "black",
+        textDecoration: "none",
     },
 }

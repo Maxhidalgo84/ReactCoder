@@ -11,8 +11,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 
-export default function Item({ producto: { id, title, imagen1, price, description1,categoria } }) {
-   
+export default function Item({ producto: { id, title, imagen1, price, description1, categoria } }) {
+
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
@@ -38,12 +38,12 @@ export default function Item({ producto: { id, title, imagen1, price, descriptio
                     {description1}
                 </Typography>
             </CardContent>
-            <CardActions sx={{display:"flex", justifyContent:"space-between"}}>
+            <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
                 <IconButton title="Añadir al carrito">
                     <AddShoppingCart />
                 </IconButton>
                 <IconButton title="Mas detalles">
-                    <Button   variant="contained" color="error"><Link to={`producto/${id}`} style={{ textDecoration: 'none', color:"white" }}>Mas detalles</Link></Button>           
+                    <Button variant="contained" color="error"><Link to={`producto/${id}`} style={{ textDecoration: 'none', color: "white" }}>Mas detalles</Link></Button>
                 </IconButton>
             </CardActions>
         </Card>

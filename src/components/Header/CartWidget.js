@@ -9,16 +9,16 @@ import Badge from '@mui/material/Badge';
 const CartWidget = () => {
     return (
         <div>
-        <Button variant="outlined">LogIn
-        </Button>
-        <IconButton >
-            <Badge badgeContent={0} color="secondary">
-              <ShoppingCart />
-             </Badge>
-        </IconButton>
-    </div>
-        
-        )
+            <Button variant="outlined">LogIn
+            </Button>
+            <IconButton >
+                <Badge badgeContent={0} color="secondary">
+                    <ShoppingCart />
+                </Badge>
+            </IconButton>
+        </div>
+
+    )
 }
 
 export default CartWidget
