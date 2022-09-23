@@ -48,7 +48,7 @@ const styles = {
     },
 
     root: {
-        margin: "auto"
+        margin: "auto",
 
     }
 }

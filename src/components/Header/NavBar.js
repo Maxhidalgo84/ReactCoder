@@ -11,9 +11,9 @@ import { Link } from "react-router-dom";
 
 
 const navItems = [
-    { id: 0, nombre: 'Zapatillas', ruta:"/categoria/zapatillas" },
-    { id: 1, nombre: 'Remeras', ruta:"/categoria/remeras" },
-    { id: 2, nombre: 'Mochilas', ruta:"/categoria/mochilas" },
+    { id: 0, nombre: 'Zapatillas', ruta:"/categoria/Zapatillas" },
+    { id: 1, nombre: 'Remeras', ruta:"/categoria/Remeras" },
+    { id: 2, nombre: 'Buzos', ruta:"/categoria/Buzos" },
 ]
 //const navItems = ['Home', 'Quienes somos', 'Contacto'];
 
@@ -53,7 +53,7 @@ const styles = {
     },
 
     appBar: {
-
+       
         borderBottom: "1px solid",
         borderBottomColor: "black",
         backgroundColor: "white",
