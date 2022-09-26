@@ -32,7 +32,6 @@ const ItemListContainer = ({ greeting }) => {
         <>
             <h1 style={styles.h1}>{greeting}</h1>
             <h2 style={styles.h1}>{categoria}</h2>
-            {/* <ItemCount initial={1} stock={10} onAdd={onAdd}/> */}
             {show ?
                 <ItemList style={styles.root} listproducts={listproducts} /> : <CircularProgress sx={{ margin: "10% auto", display: "flex", alignItems: "center", justifyContent: "center" }} />}
         </>
