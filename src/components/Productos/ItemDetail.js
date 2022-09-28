@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Box } from '@mui/material'
 import styled from '@emotion/styled';
 import ItemCount from '../ItemCount';
@@ -7,15 +7,16 @@ import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal)
 
-
-
 export const ItemDetail = ({ listproduct }) => {
+
+  const [enCarrito,setEnCarrito] = useState(false)
 
   const onAdd = (count) => {
     MySwal.fire({
       title: "Listo!",
       text: `Se agregan ${count} al carrito`,
     });
+    setEnCarrito(true)
   }
 
 
@@ -57,7 +58,7 @@ export const ItemDetail = ({ listproduct }) => {
           </Filter>
         </FilterContainer>
         <Box sx={{ width: "50%", margin: "0 auto" }}>
-          <ItemCount initial={1} stock={10} onAdd={onAdd} />
+          <ItemCount initial={1} stock={10} onAdd={onAdd} enCarrito={enCarrito} />
         </Box>
 
       </Box>

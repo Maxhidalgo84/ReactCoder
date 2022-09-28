@@ -15,8 +15,6 @@ const navItems = [
     { id: 1, nombre: 'Remeras', ruta: "/categoria/Remeras" },
     { id: 2, nombre: 'Buzos', ruta: "/categoria/Buzos" },
 ]
-//const navItems = ['Home', 'Quienes somos', 'Contacto'];
-
 
 export default function NavBar({ titulo }) {
 

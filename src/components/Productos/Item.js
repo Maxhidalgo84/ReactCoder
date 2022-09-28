@@ -43,7 +43,7 @@ export default function Item({ producto: { id, title, imagen1, price, descriptio
                     <AddShoppingCart />
                 </IconButton>
                 <IconButton title="Mas detalles">
-                    <Button variant="contained" color="error"><Link to={`producto/${id}`} style={{ textDecoration: 'none', color: "white" }}>Mas detalles</Link></Button>
+                    <Link to={`producto/${id}`} style={{ textDecoration: 'none', color: "white" }}><Button variant="contained" color="error">Mas detalles</Button></Link>
                 </IconButton>
             </CardActions>
         </Card>

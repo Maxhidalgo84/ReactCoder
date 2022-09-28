@@ -5,10 +5,11 @@ import Box from '@mui/material/Box';
 import { Button, Container } from "@mui/material";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { Link } from "react-router-dom";
 
 const MySwal = withReactContent(Swal)
 
-const ItemCount = ({ initial, stock, onAdd }) => {
+const ItemCount = ({ initial, stock, onAdd, enCarrito }) => {
 
     const [contador, setContador] = useState(initial);
 
@@ -22,22 +23,29 @@ const ItemCount = ({ initial, stock, onAdd }) => {
 
 
     return (
-        <Container sx={{textAlign:"center"}}>
-            <div style={styles.shop}>
-                <Box style={styles.shop2} sx={{ width: "90%", margin: "20px auto", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <RemoveIcon color="primary" onClick={restar} />
-                    <p>{contador}</p>
-                    <AddIcon color="primary" onClick={sumar} />
-                </Box>
-            </div>
-            <Button variant="contained" color="primary" onClick={agregarCarrito}>Agregar al carrito</Button>
+        <Container sx={{ textAlign: "center" }}>
+            {enCarrito ? <>
+                <Link to={`/Cart`} style={{ textDecoration: 'none', color: "white" }}>
+                    <Button variant="contained" color="success"> Finalizar Compra</Button>
+                </Link> </>
+                : <>
+                    <div style={styles.shop}>
+                        <Box style={styles.shop2} sx={{ width: "90%", margin: "20px auto", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <RemoveIcon color="primary" onClick={restar} />
+                            <p>{contador}</p>
+                            <AddIcon color="primary" onClick={sumar} />
+                        </Box>
+                    </div>
+                    <Button variant="contained" color="primary" onClick={agregarCarrito}>Agregar al carrito</Button>
+                </>}
         </Container>
+
     )
 }
 
 const styles = {
     shop: {
-        textAlign:"center",
+        textAlign: "center",
         margin: "0 auto",
         background: "#e7e7e7",
     },
