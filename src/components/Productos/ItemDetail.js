@@ -4,11 +4,13 @@ import styled from '@emotion/styled';
 import ItemCount from '../ItemCount';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { useCartContext } from '../../Context/CartContext';
 
 const MySwal = withReactContent(Swal)
 
 export const ItemDetail = ({ listproduct }) => {
 
+  const { addItem } = useCartContext();
   const [enCarrito,setEnCarrito] = useState(false)
 
   const onAdd = (count) => {
@@ -16,7 +18,9 @@ export const ItemDetail = ({ listproduct }) => {
       title: "Listo!",
       text: `Se agregan ${count} al carrito`,
     });
+    addItem(listproduct,count);
     setEnCarrito(true)
+    
   }
 
 
