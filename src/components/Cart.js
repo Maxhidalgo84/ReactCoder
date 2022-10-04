@@ -18,16 +18,17 @@ export const Cart = () => {
       <H1>Carrito de Compras</H1>
         <Stack textAlign="center" margin="10px" divider={<Divider orientation="row" flexItem />}>
             {cart.map(prod =>
-            <Stack  direction="row"
+            <Stack direction={{ xs: 'column', sm: 'row' }} 
             justifyContent="space-between"
             alignItems="center"
             margin="10px"
-            spacing={10} key={prod.id}> 
+            spacing={{xs:1, sm:2, md:10}} key={prod.id}> 
               <Image src={prod.imagen1} />
               <Title>{prod.title}</Title>
-              <Text>Precio Unitario: ${prod.price}</Text>
+              <Text>Subtotal: ${prod.price*prod.quantity}</Text>
               <Text>Cantidad: {prod.quantity}</Text>
-              <Button style={{borderRadius: 35, height:"fit-content", backgroundColor: "#424949", fontSize: "12px"}}  variant="contained" startIcon={<DeleteIcon />} onClick={()=>removeItem(prod.id)}>Eliminar</Button>
+              <Button style={{borderRadius: 35, height:"fit-content", backgroundColor: "#424949", fontSize: "12px"}}  variant="contained" startIcon={<DeleteIcon />}
+                onClick={()=>removeItem(prod.id)}>Eliminar</Button>
             </Stack>
           )}
         {cart.length === 0?
@@ -37,10 +38,10 @@ export const Cart = () => {
         <Button variant="contained" color="primary"> Ir a Tienda</Button>
         </Link>
         </DataContainer> :
-        <Box sx={{ flex: 1, padding: "0px 50px" }}>
+        <Box sx={{ flex: 1, padding: "10px 50px", margin:"15px auto", backgroundColor:"white", maxWidth:"300px" }}>
         <h2>Cantidad de Productos: {totalQuantity()}</h2>
         <h2>TOTAL: ${totalPrice()}</h2>  
-        <Button variant="contained" color="error" onClick={() => reset()}>Vaciar Carrito</Button>
+        <Button variant="contained" color="error" onClick={reset}>Vaciar Carrito</Button>
         </Box>}
       </Stack>
     </>

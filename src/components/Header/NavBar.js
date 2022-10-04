@@ -29,7 +29,7 @@ export default function NavBar({ titulo }) {
                         {titulo}
 
                     </div>
-                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         {navItems.map((item) => (
                             <Button key={item.id}>
                                 <Link to={item.ruta} style={styles.link}>{item.nombre}</Link>
