@@ -9,9 +9,23 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { useCartContext } from '../../Context/CartContext';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
+const MySwal = withReactContent(Swal)
 
 export default function Item({ producto: { id, title, imagen1, price, description1, categoria } }) {
+
+    const { addItem } = useCartContext();
+
+    const shopItem = () => {
+        MySwal.fire({
+            title: "Listo!",
+            text: `Se agrego ${description1} al carrito`,
+        });
+        addItem({ id, title, imagen1, price, description1, categoria },1);        
+    }
 
     return (
         <Card sx={{ maxWidth: 345 }}>
@@ -40,7 +54,7 @@ export default function Item({ producto: { id, title, imagen1, price, descriptio
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
                 <IconButton title="Añadir al carrito">
-                    <AddShoppingCart />
+                    <AddShoppingCart onClick={()=>shopItem()} />
                 </IconButton>
                 
                     <Link to={`producto/${id}`} style={{ textDecoration: 'none', color: "white" }}><Button variant="contained" color="error">Mas detalles</Button></Link>
