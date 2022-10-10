@@ -1,39 +1,69 @@
 import React, { useState, useEffect } from "react";
-import productos from "./Productos/ProducData";
+//import productos from "./Productos/ProducData";
 import { ItemList } from "./Productos/ItemList";
 import CircularProgress from '@mui/material/CircularProgress';
 import { useParams } from 'react-router-dom';
+import { db } from "../Firebase/Firebase";
+import { getDocs, collection, query, where } from "firebase/firestore";
 
 
-const promesa = new Promise((res) => {
-    res(productos)
-})
+// const promesa = new Promise((res) => {
+//     res(productos)
+// })
 
 
 const ItemListContainer = ({ greeting }) => {
 
     const [listproducts, setListProducts] = useState([]);
     const [show, setShow] = useState(false);
+    const [error, setError] = useState(false);
 
     const { categoria } = useParams()
 
     useEffect(() => {
-        let timer = setTimeout(() => {
-            setShow(true)
-            promesa
-                .then((res) => { categoria ? setListProducts(res.filter(producto => producto.categoria === categoria)) : setListProducts(res) })
-        }, 1000);
+        const productsCollection = collection(db, "products");
+        const q = categoria ? query(productsCollection, where("categoria", "==", `${categoria}`)) : productsCollection
 
-        return () => clearTimeout(timer)
-    }, [categoria]);
+        getDocs(q)
+        .then((data)=> {
+            const lista =data.docs.map((product) =>{
+                return {
+                    ...product.data(),
+                    id: product.id, 
+                }
+            })
+            setListProducts(lista)
+        })
+        .catch(()=>{
+            setError(true)
+        })
+        .finally(()=>{
+            setTimeout(() => {
+                setShow(true)
+            }, 1500) 
+        })
+    }, [categoria])
+    
+
+
+    // useEffect(() => {
+    //     let timer = setTimeout(() => {
+    //         setShow(true)
+    //         promesa
+    //             .then((res) => { categoria ? setListProducts(res.filter(producto => producto.categoria === categoria)) : setListProducts(res) })
+    //     }, 1000);
+
+    //     return () => clearTimeout(timer)
+    // }, [categoria]);
 
 
     return (
         <>
             <h1 style={styles.h1}>{greeting}</h1>
             <h2 style={styles.h1}>{categoria}</h2>
-            {show ?
-                <ItemList style={styles.root} listproducts={listproducts} /> : <CircularProgress sx={{ margin: "10% auto", display: "flex", alignItems: "center", justifyContent: "center" }} />}
+            {show ? <ItemList style={styles.root} listproducts={listproducts} /> 
+            : error? <p>error</p> 
+            : <CircularProgress sx={{ margin: "10% auto", display: "flex", alignItems: "center", justifyContent: "center" }} />}
         </>
     )
 }
