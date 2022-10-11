@@ -53,8 +53,8 @@ export default function Item({ producto: { id, title, imagen1, price, descriptio
                 </Typography>
             </CardContent>
             <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-                <IconButton title="Añadir al carrito">
-                    <AddShoppingCart onClick={()=>shopItem()} />
+                <IconButton onClick={()=>shopItem()} title="Añadir al carrito">
+                    <AddShoppingCart  />
                 </IconButton>
                 
                     <Link to={`producto/${id}`} style={{ textDecoration: 'none', color: "white" }}><Button variant="contained" color="error">Mas detalles</Button></Link>

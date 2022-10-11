@@ -6,6 +6,7 @@ import Divider from '@mui/material/Divider';
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import DeleteIcon from '@mui/icons-material/Delete';
+// import { CartForm } from './CartForm';
 
 export const Cart = () => {
 
@@ -16,7 +17,7 @@ export const Cart = () => {
   return (
     <>
       <H1>Carrito de Compras</H1>
-      <Stack textAlign="center" margin="10px" divider={<Divider orientation="row" flexItem />}>
+      <Stack textAlign="center" margin="10px" divider={<Divider orientation="horizontal" flexItem />}>
         {cart.map(prod =>
           <Stack direction={{ xs: 'column', sm: 'row' }}
             justifyContent="space-between"
@@ -42,6 +43,7 @@ export const Cart = () => {
             <h2>Cantidad de Productos: {totalQuantity()}</h2>
             <h2>TOTAL: ${totalPrice()}</h2>
             <Button variant="contained" color="error" onClick={reset}>Vaciar Carrito</Button>
+             {/* <CartForm />  */}
           </Box>}
       </Stack>
     </>
