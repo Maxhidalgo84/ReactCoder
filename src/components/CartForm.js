@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { useCartContext } from '../Context/CartContext';
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
+import { Button } from '@mui/material';
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { db } from '../Firebase/Firebase';
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { Alert, CircularProgress } from "@mui/material";
-import styled from '@emotion/styled'
-
+import { addDoc, collection, serverTimestamp, updateDoc, doc } from "firebase/firestore";
+import { Alert } from "@mui/material";
+import { Link } from 'react-router-dom';
+import DialogContentText from '@mui/material/DialogContentText';
 
 
 const initialState = {
@@ -25,7 +26,6 @@ export const CartForm = () => {
     const { cart, totalPrice, reset } = useCartContext()
 
     const [open, setOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [finish, setFinish] = useState(false);
     const [complete, setComplete] = useState(false)
     const [buyer, setBuyer] = useState(initialState);
@@ -34,8 +34,8 @@ export const CartForm = () => {
 
 
     const finalizarCompra = (buyer, items) => {
-        setBuyer(buyer);
-        setComplete(true)
+        setComplete(true);
+        setFinish(false);
         const ventasCollection = collection(db, "ventas");
         addDoc(ventasCollection, {
             buyer,
@@ -43,9 +43,18 @@ export const CartForm = () => {
             date: serverTimestamp(),
             total: totalPrice()
         })
-            .then((result) => setIdVenta(result.id))
-        reset();
+            .then(res=>{ setIdVenta(res.id);
+                items.forEach(producto =>{ 
+                    actStock(producto)
 
+                });
+            })
+
+    }
+
+    const actStock = (producto) =>{
+        const updateStock = doc(db,"products", producto.id);
+        updateDoc(updateStock,{stock:(producto.stock - producto.quantity)});
     }
 
     const handleClickOpen = () => {
@@ -59,7 +68,7 @@ export const CartForm = () => {
 
     const handleClose = () => {
         setOpen(false);
-        if (idVenta !== "") {
+        if (complete) {
             reset();
         }
     };
@@ -68,34 +77,36 @@ export const CartForm = () => {
         if (buyer.address === "" || buyer.name === "" || buyer.email === "") {
             setAlert(true);
             return;
-        } setLoading(true)
-        finalizarCompra(buyer, cart)
+        } else {
+        finalizarCompra(buyer, cart)}
 
     }
 
     return (
         <div>
-            <button
+            <Button 
+                sx={{margin:"15px"}}
+                variant="contained" color="success"
                 onClick={handleClickOpen}
 
             >
                 Finalizar Compra
-            </button>
+            </Button>
 
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle >
-                    Ingrese los datos para la entrega
+                <DialogTitle sx={{textAlign:"center"}}>
+                    Formulario de Compra
                 </DialogTitle>
                 {alert ? (
                     <Alert variant="filled" severity="error">
                         Nombre, Dirección y Email son datos obligatorios
                     </Alert>
-                ) : null}
-                {complete && finish ? (
-                    <Alert variant="filled" severity="success" >
-                        Compra realizada con éxito su id es: <p>{idVenta}</p>
+                ) : 
+                complete ? (
+                    <Alert variant="filled" severity="success">
+                        Compra realizada con exito su id es: <p>{idVenta}</p>
                     </Alert>
-                ) : null}
+                ):<DialogContentText sx={{textAlign:"center"}}>Por favor ingrese los datos para confirmar la compra</DialogContentText>}
                 <DialogContent>
                     <TextField
                         autoFocus
@@ -150,17 +161,15 @@ export const CartForm = () => {
 
 
                 <DialogActions>
-                    <button onClick={handleClose}>
-                        {finish ? 'CERRAR' : 'CANCELAR'}
-                    </button>
-                    {finish ? null : <button onClick={handleConfirm} disabled={loading}>
-                        {loading ? (
-                            <CircularProgress />
-                        ) : (
-                            "CONFIRMAR"
-                        )}
-
-                    </button>}
+                    <Button  variant="contained" color="error" onClick={handleClose}>
+                        {complete ? 'CERRAR' : 'CANCELAR'}
+                    </Button>
+                    {finish ? <Button variant="contained" color="success" onClick={handleConfirm}>CONFIRMAR
+                       
+                    </Button>: 
+                    <Link to={`/`} style={{ textDecoration: 'none', margin:"0px 10px" }}>
+                        <Button onClick={handleClose} variant="contained" color="primary"> Seguir Comprando</Button>
+                    </Link>}
                 </DialogActions>
             </Dialog>
         </div>

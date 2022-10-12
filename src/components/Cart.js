@@ -6,13 +6,12 @@ import Divider from '@mui/material/Divider';
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import DeleteIcon from '@mui/icons-material/Delete';
-// import { CartForm } from './CartForm';
+import { CartForm } from './CartForm';
 
 export const Cart = () => {
 
   const { cart, totalPrice, totalQuantity, removeItem, reset } = useCartContext()
 
-  console.log(totalPrice());
 
   return (
     <>
@@ -32,7 +31,7 @@ export const Cart = () => {
               onClick={() => removeItem(prod.id)}>Eliminar</Button>
           </Stack>
         )}
-        {cart.length === 0 ?
+        {totalQuantity() === 0 ?
           <DataContainer >
             <H2>Tu carrito esta vacio</H2>
             <Link to={`/`} style={{ textDecoration: 'none', color: "white" }}>
@@ -43,7 +42,7 @@ export const Cart = () => {
             <h2>Cantidad de Productos: {totalQuantity()}</h2>
             <h2>TOTAL: ${totalPrice()}</h2>
             <Button variant="contained" color="error" onClick={reset}>Vaciar Carrito</Button>
-             {/* <CartForm />  */}
+            <CartForm/>
           </Box>}
       </Stack>
     </>

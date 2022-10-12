@@ -62,7 +62,9 @@ export const ItemDetail = ({ listproduct }) => {
           </Filter>
         </FilterContainer>
         <Box sx={{ width: "50%", margin: "0 auto" }}>
-          <ItemCount initial={1} stock={10} onAdd={onAdd} enCarrito={enCarrito} />
+          {listproduct.stock<1?
+          "SIN STOCK":
+          <ItemCount initial={1} stock={listproduct.stock} onAdd={onAdd} enCarrito={enCarrito} />}
         </Box>
 
       </Box>
