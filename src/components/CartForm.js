@@ -56,8 +56,12 @@ export const CartForm = () => {
 
     const actStock = (producto,talle) =>{
         const updateStock = doc(db,"products", producto.id);
-        const ref2 = updateStock.child("talles2")
-        updateDoc(ref2,{talles2:(producto.stock - producto.quantity)});
+        let tallesupd= updateStock.talles2;
+        console.log(tallesupd[talle]);
+        tallesupd[talle] = tallesupd[talle] - producto.quantity;
+        console.log();
+
+        updateDoc(updateStock,{talles2:(tallesupd)});
     }
 
     const handleClickOpen = () => {

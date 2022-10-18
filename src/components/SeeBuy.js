@@ -44,7 +44,7 @@ export const SeeBuy = ({ventas}) => {
     // console.log(ventas.total);
     return (
         <Container sx={{ padding: 5, display: "flex", textAlign: "center" }}>
-            {ventas.total>100?
+            {/* {ventas.total>100? */}
             <div>
                 <Title>Nombre: {ventas.buyer.name}</Title> 
                 <Title>Email: {ventas.buyer.email}</Title> 
@@ -59,7 +59,8 @@ export const SeeBuy = ({ventas}) => {
                 </Stack>
                 )}
                 <Price>TOTAL: ${ventas.total}</Price>
-            </div>: "no se han encontrado ventas"}
+            </div>
+            {/* : "no se han encontrado ventas"} */}
         </Container>
                 
 

@@ -19,7 +19,8 @@ export const ListBuy = () => {
     const [ventas, setVentas] = useState({});
     const [error, setError] = useState(false);
     const [show, setShow] = useState(false);
-    const [confirmar, SetConfirmar] = useState(false);
+    const [loading , setLoading] = useState(false)
+    const [confirmar, setConfirmar] = useState(false);
 
     const handlerOnChange = (e) => {
         setSearch(e.target.value);
@@ -29,72 +30,77 @@ export const ListBuy = () => {
         setShow(false)
         setSearch("")
         setVentas({})
+        setConfirmar(false)
     }
 
-    // const finalizar = async()=> {
-    //     try { 
-    //         const ventasCollection= collection(db,"ventas");
-    //         const refDoc = doc(ventasCollection, search);
-    //         await getDoc(refDoc)
-    //         .then((res) => {
-    //             const product = {
-    //                 id: res.id,
-    //                 ...res.data()
-    //             }
-    //             setVentas(product);
-    //         })
-    //         // .catch(()=>{
-    //         //         setError(true);
-    //         // })
-    //         // .finally(()=>{
-    //         //     setTimeout(() => {
-    //         //                 setShow(true)
-    //         //             }, 1500) 
-    //         // })
-    //     }catch(error){
-    //         setError(true);}    
-    //     finally{
-    //             setTimeout(() => {
-    //                         setShow(true)
-    //                     }, 1000) 
+    const finalizar = ()=> {
+            setLoading(true)
+            const ventasCollection= collection(db,"ventas");
+            const refDoc = doc(ventasCollection, search);
+            getDoc(refDoc)
+            .then((res) => {
+                const product = {
+                    id: res.id,
+                    ...res.data()
+                }
+                setVentas(product);
+                if(product.items === undefined){
+                    setShow(false)
+                    setConfirmar(true)
+                }else {setShow(true)}
+            })
+             .catch(()=>{
+                    setError(true);
+            })
+            .finally(()=>{
+                setTimeout(() => {
+                        setLoading(false)
+                         }, 1500) 
+            })
+        // }catch(error){
+        //     setError(true);}    
+        // finally{
+        //         setTimeout(() => {
+        //                     setShow(true)
+        //                 }, 1000) 
+        //     }
+    }
+
+    
+    // useEffect(() => {
+    //     if(search!= ""){
+    //     const productCollection= collection(db,'ventas');
+    //     const refDoc = doc(productCollection, search);
+    //     getDoc(refDoc)
+    //     .then((res) => {
+    //         const product = {
+    //             id: res.id,
+    //             ...res.data()
     //         }
+    //         setVentas(product)
+    //     })
+    //     .catch(()=>{
+    //         setError(true);
+    //     })
+    //     .finally(()=>{
+    //         setTimeout(() => {
+    //             setShow(true)
+    //             SetConfirmar(false)
+    //         }, 1500) 
+    //     })}else {
+    //         setShow(false)
+    //     }
+    // }, [confirmar])
+    
+
+    // const finalizar =()=>{
+    //     SetConfirmar(true)
     // }
-
-    
-    useEffect(() => {
-        if(search!= ""){
-        const productCollection= collection(db,'ventas');
-        const refDoc = doc(productCollection, search);
-        getDoc(refDoc)
-        .then((res) => {
-            const product = {
-                id: res.id,
-                ...res.data()
-            }
-            setVentas(product)
-        })
-        .catch(()=>{
-            setError(true);
-        })
-        .finally(()=>{
-            setTimeout(() => {
-                setShow(true)
-                SetConfirmar(false)
-            }, 1500) 
-        })}else {console.log("nada")
-            setShow(false)
-        }
-    }, [confirmar])
-    
-
-    const finalizar =()=>{
-        SetConfirmar(true)
-    }
 
 
   return (
     <>
-        <H1>Ingrese su id para ver su compra</H1>
+        <H1>Listado de compras</H1>
         <Container sx={{width:"400px"}}>
             <TextField
             autoFocus
@@ -108,9 +114,14 @@ export const ListBuy = () => {
             variant="standard"
             onChange={handlerOnChange}
             />
-            <Button onClick={finalizar} variant="contained" color="success">Ver compra</Button>
-            <Button onClick={limpiar} variant="contained" color="error">Limpiar</Button>
-            {show? < SeeBuy ventas={ventas}  />
+            <Stack direction={{ xs: 'column', sm: 'row' }}
+            justifyContent="space-between" >
+                <Button onClick={finalizar} variant="contained" color="success">Ver compra</Button>
+                <Button onClick={limpiar} variant="contained" color="error">Limpiar</Button>
+            </Stack>            
+            {loading ? 
+            <CircularProgress sx={{ margin: "10% auto", display: "flex", alignItems: "center", justifyContent: "center" }} />
+            : show? < SeeBuy ventas={ventas}  />
             // <div>
             //     <Title>Nombre: {ventas.buyer.name}</Title> 
             //     <Title>Email: {ventas.buyer.email}</Title> 
@@ -127,7 +138,7 @@ export const ListBuy = () => {
             //     <Price>TOTAL: ${ventas.total}</Price>
             //     <Button onClick={limpiar} variant="contained" color="error">Limpiar</Button>
             // </div>
-            : error? <p>{error}</p> : ""}
+            :  confirmar && !show? <h2>no se han encontrado ventas para ese id</h2> : <h2>Ingrese id para ver su compra</h2>}
         </Container>        
         {/* <Link to={`${search}`} style={{ textDecoration: 'none', color: "white" }}>
             <Button variant="contained" color="error">Ver compra</Button></Link> */}
@@ -152,6 +163,7 @@ const Title = styled.h1`
 const H1 = styled.h1`
   font-weight: 300;
   text-align:center;
+  color:white;
 `;
 
 const Desc = styled.p`

@@ -18,18 +18,28 @@ const  App = () => {
   return (
     <>
     <BrowserRouter>
-      <CartContextProvider>
-      <NavBar titulo={titulo}/>
+      {/* <AuthCustomProvider>
         <Routes>
-            <Route path="/" element={<ItemListContainer greeting={"Bienvenidos a nuestra Tienda Online"}/>} />
-            <Route path="categoria/:categoria" element={<ItemListContainer />} />
-            <Route path="producto/:id" element={<ItemDetailContainer />}/>
-            <Route path="categoria/:categoria/producto/:id" element={<ItemDetailContainer />}/> 
-            <Route path="/cart" element={<Cart/>}/>
-            <Route path="/vercompra" element={<ListBuy/>}/>    
-            <Route path="/vercompra/:find" element={<SeeBuy/>}/>      
-        </Routes>
-      </CartContextProvider>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/recover-password' element={<RecoverPassword />}/>
+          <Route path='*' element={
+            <ProtectedRoute> */}
+            <CartContextProvider>
+            <NavBar titulo={titulo}/>
+              <Routes>
+                  <Route path="/" element={<ItemListContainer greeting={"Bienvenidos a nuestra Tienda Online"}/>} />
+                  <Route path="categoria/:categoria" element={<ItemListContainer />} />
+                  <Route path="producto/:id" element={<ItemDetailContainer />}/>
+                  <Route path="categoria/:categoria/producto/:id" element={<ItemDetailContainer />}/> 
+                  <Route path="/cart" element={<Cart/>}/>
+                  <Route path="/vercompra" element={<ListBuy/>}/>    
+                  <Route path="/vercompra/:find" element={<SeeBuy/>}/>      
+              </Routes>
+            </CartContextProvider>
+            {/* </ProtectedRoute>}/>
+        </Routes>    
+      </AuthCustomProvider> */}
       </BrowserRouter>
     </>
   );

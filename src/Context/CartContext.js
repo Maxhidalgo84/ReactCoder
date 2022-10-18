@@ -1,12 +1,19 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 
 const CartContext = createContext();
 export const useCartContext = () => useContext(CartContext)
 
 const CartContextProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
+
+    let cartLocal = JSON.parse(localStorage.getItem("cart"));
+    if (cartLocal === null) {
+        cartLocal = [];
+    }
+
+    const [cart, setCart] = useState(cartLocal);
     const [talle, setTalle] = useState("");
 
+    
     const isInCart = (id) => cart.find(item => item.id === id);
     
     const addItem = (producto, quantity,size) => {
@@ -28,6 +35,10 @@ const CartContextProvider = ({ children }) => {
         }
     };
     
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
+
     const choiceTalle = (talle) => {
         setTalle(talle)
     }
