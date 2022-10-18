@@ -7,10 +7,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { db } from '../Firebase/Firebase';
-import { addDoc, collection, serverTimestamp, updateDoc, doc } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp, updateDoc, doc, ref } from "firebase/firestore";
 import { Alert } from "@mui/material";
 import { Link } from 'react-router-dom';
 import DialogContentText from '@mui/material/DialogContentText';
+import { SafetyCheckOutlined } from '@mui/icons-material';
 
 
 const initialState = {
@@ -45,16 +46,18 @@ export const CartForm = () => {
         })
             .then(res=>{ setIdVenta(res.id);
                 items.forEach(producto =>{ 
-                    actStock(producto)
-
+                    actStock(producto,producto.size)
                 });
             })
 
     }
 
-    const actStock = (producto) =>{
+    
+
+    const actStock = (producto,talle) =>{
         const updateStock = doc(db,"products", producto.id);
-        updateDoc(updateStock,{stock:(producto.stock - producto.quantity)});
+        const ref2 = updateStock.child("talles2")
+        updateDoc(ref2,{talles2:(producto.stock - producto.quantity)});
     }
 
     const handleClickOpen = () => {

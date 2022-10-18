@@ -5,10 +5,11 @@ export const useCartContext = () => useContext(CartContext)
 
 const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
+    const [talle, setTalle] = useState("");
 
     const isInCart = (id) => cart.find(item => item.id === id);
     
-    const addItem = (producto, quantity) => {
+    const addItem = (producto, quantity,size) => {
         if (isInCart(producto.id)) {
             const  newCart = cart.map(item => {
                 if(item.id === producto.id ){
@@ -20,11 +21,16 @@ const CartContextProvider = ({ children }) => {
             })
             setCart(newCart)
         } else {
-            const newProducto= {...producto, quantity: quantity};
+            const newProducto= {...producto, size:size, quantity: quantity};
             setCart([...cart, newProducto])
+            console.log(cart);
 
         }
     };
+    
+    const choiceTalle = (talle) => {
+        setTalle(talle)
+    }
 
     const removeItem = (id) => {
         setCart(cart.filter(item => item.id !== id));
@@ -44,7 +50,7 @@ const CartContextProvider = ({ children }) => {
 
 
     return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, reset, totalPrice, totalQuantity }}>
+        <CartContext.Provider value={{ cart, addItem, removeItem, reset, totalPrice, totalQuantity, choiceTalle }}>
             {children}
         </CartContext.Provider>
     );

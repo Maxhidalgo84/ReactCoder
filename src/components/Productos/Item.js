@@ -15,7 +15,7 @@ import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal)
 
-export default function Item({ producto: { id, title, imagen1, price, description1, categoria,stock } }) {
+export default function Item({ producto: { id, title, imagen1, price, description1, categoria,stock,talles2 } }) {
 
     const { addItem } = useCartContext();
 
@@ -24,7 +24,7 @@ export default function Item({ producto: { id, title, imagen1, price, descriptio
             title: "Listo!",
             text: `Se agrego ${description1} al carrito`,
         });
-        addItem({ id, title, imagen1, price, description1, categoria, stock },1);        
+        addItem({ id, title, imagen1, price, description1, categoria, stock,talles2 },1);        
     }
 
     return (

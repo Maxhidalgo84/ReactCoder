@@ -27,6 +27,7 @@ export const Cart = () => {
             <Title>{prod.title}</Title>
             <Text>Subtotal: ${prod.price * prod.quantity}</Text>
             <Text>Cantidad: {prod.quantity}</Text>
+            <Text>talle:{prod.size}</Text>
             <Button style={{ borderRadius: 35, height: "fit-content", backgroundColor: "#424949", fontSize: "12px" }} variant="contained" startIcon={<DeleteIcon />}
               onClick={() => removeItem(prod.id)}>Eliminar</Button>
           </Stack>

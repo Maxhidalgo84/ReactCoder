@@ -35,6 +35,9 @@ export default function NavBar({ titulo }) {
                                 <Link to={item.ruta} style={styles.link}>{item.nombre}</Link>
                             </Button>
                         ))}
+                        <Button>
+                            <Link to="/vercompra" style={styles.link}>Ver Compra</Link>
+                        </Button>
                     </Box>
                     <Link to="/cart"><CartWidget /></Link>
                 </Toolbar>
