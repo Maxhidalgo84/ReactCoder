@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Box } from '@mui/material'
+import React, { useState } from 'react';
+import { Container} from '@mui/material'
 import styled from '@emotion/styled';
 import { db } from "../Firebase/Firebase";
 import { getDoc, collection, doc } from 'firebase/firestore';
 import Stack from '@mui/material/Stack';
 import TextField from "@mui/material/TextField";
 import CircularProgress from '@mui/material/CircularProgress';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { SeeBuy } from './SeeBuy';
-import { async } from '@firebase/util';
-
 
 export const ListBuy = () => {
     
@@ -51,53 +47,17 @@ export const ListBuy = () => {
             })
              .catch(()=>{
                     setError(true);
+                    console.log(error);
             })
             .finally(()=>{
                 setTimeout(() => {
                         setLoading(false)
                          }, 1500) 
             })
-        // }catch(error){
-        //     setError(true);}    
-        // finally{
-        //         setTimeout(() => {
-        //                     setShow(true)
-        //                 }, 1000) 
-        //     }
     }
 
     
-    // useEffect(() => {
-    //     if(search!= ""){
-    //     const productCollection= collection(db,'ventas');
-    //     const refDoc = doc(productCollection, search);
-    //     getDoc(refDoc)
-    //     .then((res) => {
-    //         const product = {
-    //             id: res.id,
-    //             ...res.data()
-    //         }
-    //         setVentas(product)
-    //     })
-    //     .catch(()=>{
-    //         setError(true);
-    //     })
-    //     .finally(()=>{
-    //         setTimeout(() => {
-    //             setShow(true)
-    //             SetConfirmar(false)
-    //         }, 1500) 
-    //     })}else {
-    //         setShow(false)
-    //     }
-    // }, [confirmar])
-    
-
-    // const finalizar =()=>{
-    //     SetConfirmar(true)
-    // }
-
-
+  
   return (
     <>
         <H1>Listado de compras</H1>
@@ -147,37 +107,9 @@ export const ListBuy = () => {
 }
 
 
-
-
-const Image = styled.img`
-  width: 40%;
-  margin: 10px 5px;
-`;
-
-
-const Title = styled.h1`
-  font-weight: 200;
-  color: white;
-`;
-
 const H1 = styled.h1`
   font-weight: 300;
   text-align:center;
   color:white;
 `;
 
-const Desc = styled.p`
-  margin: 20px 0px;
-  color: white;
-`;
-
-const Price = styled.span`
-  font-weight: 100;
-  font-size: 40px;
-  text-align:center;
-`;
-
-const Text = styled.h3`
-  font-weight: 200;
-  fontsize: 20px;
-`

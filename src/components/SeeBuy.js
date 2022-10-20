@@ -1,66 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Box } from '@mui/material'
+import React from 'react';
+import { Container } from '@mui/material'
 import styled from '@emotion/styled';
-import { db } from "../Firebase/Firebase";
-import { getDoc, collection, doc } from 'firebase/firestore';
 import Stack from '@mui/material/Stack';
-import TextField from "@mui/material/TextField";
-import CircularProgress from '@mui/material/CircularProgress';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import Divider from '@mui/material/Divider';
+
 
 
 export const SeeBuy = ({ventas}) => {
-
-    // const [ventas, setVentas] = useState({});
-    // const [error, setError] = useState(false);
-    // const [show, setShow] = useState(false)
-
-    // const {find} = useParams()
-
-    // useEffect(() => {
-    //     const ventasCollection= collection(db,"ventas");
-    //     const refDoc = doc(ventasCollection, "4XQpcpg0bzag2as5KFze");
-    //     getDoc(refDoc)
-    //     .then((res) => {
-    //         const product = {
-    //             id: res.id,
-    //             ...res.data()
-    //         }
-    //         setVentas(product)
-    //         console.log(ventas);
-    //     })
-    //     .catch(()=>{
-    //         setError(true);
-    //     })
-    //     .finally(()=>{
-    //         setTimeout(() => {
-    //             setShow(true)
-    //         }, 1500) 
-    //     })
-    // }, [find])
-    
-    // console.log(ventas.total);
     return (
         <Container sx={{ padding: 5, display: "flex", textAlign: "center" }}>
-            {/* {ventas.total>100? */}
             <div>
-                <Title>Nombre: {ventas.buyer.name}</Title> 
-                <Title>Email: {ventas.buyer.email}</Title> 
                 <Title> Detalle de productos:</Title>
+                <Stack textAlign="center" margin="10px" divider={<Divider orientation="horizontal" flexItem />}>
                 {ventas.items.map(prod =>
                 <Stack direction={{ xs: 'column' }}
                 alignItems="start"
                 margin="10px"
                 spacing={{ xs: 1, sm: 2, md: 2 }} key={prod.id}>
                     <Text>Producto: {prod.title}</Text>
+                    <Text>Talle: {prod.size} </Text>
                     <Text>Cantidad: {prod.quantity}</Text>
                 </Stack>
                 )}
+                </Stack>
                 <Price>TOTAL: ${ventas.total}</Price>
             </div>
-            {/* : "no se han encontrado ventas"} */}
         </Container>
                 
 

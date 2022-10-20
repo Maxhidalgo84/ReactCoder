@@ -7,17 +7,18 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { db } from '../Firebase/Firebase';
-import { addDoc, collection, serverTimestamp, updateDoc, doc, ref } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp, updateDoc, doc, getDoc } from "firebase/firestore";
 import { Alert } from "@mui/material";
 import { Link } from 'react-router-dom';
 import DialogContentText from '@mui/material/DialogContentText';
-import { SafetyCheckOutlined } from '@mui/icons-material';
+
 
 
 const initialState = {
     name: "",
     address: "",
     email: "",
+    email2: "",
     telephone: "",
 };
 
@@ -32,7 +33,13 @@ export const CartForm = () => {
     const [buyer, setBuyer] = useState(initialState);
     const [idVenta, setIdVenta] = useState("");
     const [alert, setAlert] = useState(false);
+    const [alert2, setAlert2] = useState(false);
+    const [alert3, setAlert3] = useState(false);
 
+
+    const validateEmail = (email) => {
+        return email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); 
+    };
 
     const finalizarCompra = (buyer, items) => {
         setComplete(true);
@@ -52,17 +59,20 @@ export const CartForm = () => {
 
     }
 
-    
-
     const actStock = (producto,talle) =>{
-        const updateStock = doc(db,"products", producto.id);
-        let tallesupd= updateStock.talles2;
-        console.log(tallesupd[talle]);
-        tallesupd[talle] = tallesupd[talle] - producto.quantity;
-        console.log();
-
-        updateDoc(updateStock,{talles2:(tallesupd)});
+        const refDoc = doc(db,"products", producto.id);
+        getDoc(refDoc)
+        .then((data)=>{
+            let updateStock = data;
+            let tallesupd= updateStock.get("talles");
+            tallesupd[talle] = tallesupd[talle] - producto.quantity;
+            updateDoc(refDoc,{talles:(tallesupd)});
+        })
+        .catch(() =>{
+            console.log("error lerr articulo");
+        })    
     }
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -81,11 +91,16 @@ export const CartForm = () => {
     };
 
     const handleConfirm = () => {
-        if (buyer.address === "" || buyer.name === "" || buyer.email === "") {
+        if (buyer.address === "" || buyer.name === "" || buyer.email === "" || buyer.email2 === "") {
             setAlert(true);
             return;
-        } else {
-        finalizarCompra(buyer, cart)}
+        } else if ((!validateEmail(buyer.email))) {
+            setAlert2(true);
+            return;
+        } else if(buyer.email!== buyer.email2){
+            setAlert3(true);
+            return;
+        }finalizarCompra(buyer, cart)
 
     }
 
@@ -107,6 +122,16 @@ export const CartForm = () => {
                 {alert ? (
                     <Alert variant="filled" severity="error">
                         Nombre, Dirección y Email son datos obligatorios
+                    </Alert>
+                ) :
+                alert3?(
+                    <Alert variant="filled" severity="error">
+                        Los campos email no coinciden
+                    </Alert>
+                ) :
+                alert2 ? (
+                    <Alert variant="filled" severity="error">
+                        No has ingresado un correo valido
                     </Alert>
                 ) : 
                 complete ? (
@@ -162,6 +187,19 @@ export const CartForm = () => {
                         fullWidth
                         variant="standard"
                         helperText="Se enviara la informacion a este correo"
+                        onChange={handlerOnChange}
+                    />
+                     <TextField
+                        autoFocus
+                        onFocus={() => setAlert(false)}
+                        margin="dense"
+                        id="email2"
+                        name="email2"
+                        label="Email"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                        helperText="confirme su email"
                         onChange={handlerOnChange}
                     />
                 </DialogContent>

@@ -22,7 +22,8 @@ const ItemListContainer = ({ greeting }) => {
 
     useEffect(() => {
         const productsCollection = collection(db, "products");
-        const q = categoria ? query(productsCollection, where("categoria", "==", `${categoria}`)) : productsCollection
+        const q = categoria ? query(productsCollection, where("categoria", "==", `${categoria}`)) :
+        query(productsCollection, where("destacados", "==", true)) 
 
         getDocs(q)
         .then((data)=> {
@@ -44,18 +45,6 @@ const ItemListContainer = ({ greeting }) => {
         })
     }, [categoria])
     
-
-
-    // useEffect(() => {
-    //     let timer = setTimeout(() => {
-    //         setShow(true)
-    //         promesa
-    //             .then((res) => { categoria ? setListProducts(res.filter(producto => producto.categoria === categoria)) : setListProducts(res) })
-    //     }, 1000);
-
-    //     return () => clearTimeout(timer)
-    // }, [categoria]);
-
 
     return (
         <>

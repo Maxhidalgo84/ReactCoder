@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Container, Box } from '@mui/material'
 import styled from '@emotion/styled';
 import ItemCount from '../ItemCount';
@@ -9,27 +9,26 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { sizeHeight } from '@mui/system';
+import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
+
 
 const MySwal = withReactContent(Swal)
 
 export const ItemDetail = ({ listproduct }) => {
 
+  const medidas = listproduct.talles
+
   const { addItem } = useCartContext();
   const [enCarrito,setEnCarrito] = useState(false)
-  const [size, setSize] = React.useState('');
+  const [size, setSize] = useState("");
   const [stocks, setStocks] = useState("");
-  
-  // useEffect(() => {
-  //   setTimeout(()=>{
-  //     setStocks(size)
-  //   },1000)
-  // }, [size])
+  const [show, setShow] = useState(false);
   
   const handleChange = (e) => {
     setSize(e.target.value[0]);
     setStocks(e.target.value[1])
-    console.log(stocks);
+    setShow(true)
   };
 
   const onAdd = (count) => {
@@ -42,79 +41,72 @@ export const ItemDetail = ({ listproduct }) => {
     
   }
 
-  const medidas = listproduct.talles2
 
   return (
-    <Container sx={{ padding: 5, display: "flex", textAlign: "center" }}>
-      <Box sx={{ width: 600, height: 300 }}>
-        <Image src={listproduct.imagen1} />
-        <Image src={listproduct.imagen2} />
-        <Image src={listproduct.imagen3} />
+    // <Container sx={{ padding: 5, display: "flex", textAlign: "center" }}>
+    <>
+    <H1>Detalle del producto</H1>
+    <Stack direction={{ xs: 'column', md: 'row' }}
+            justifyContent="space-between"
+            textAlign="center"
+            margin="10px"
+            spacing={{ xs: 1, sm: 2, md: 5 }} >       
+      <Box sx={{ maxwidth: 600 }}>
+      <Grid container spacing={1} justifyContent="space-around" >
+        <Grid item xs={12} sm={6} md={6} lg={6}>
+          <Image src={listproduct.imagen1} />
+        </Grid>
+        <Grid item xs={12} sm={6} md={6} lg={6}>
+          <Image src={listproduct.imagen2} />
+        </Grid>  
+        <Grid item xs={12} sm={6} md={6} lg={6}>
+          <Image src={listproduct.imagen3} />
+        </Grid> 
+      </Grid>   
       </Box>
-      <Box sx={{ flex: 1, padding: "0px 50px" }}>
-        <Title>{listproduct.title}</Title>
-        <Desc>
-          {listproduct.description2}
-        </Desc>
-        <Price>Precio: ${listproduct.price}</Price>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="demo-select-small">Talle</InputLabel>
-      <Select
-        labelId="demo-select-small"
-        id="demo-select-small"
-        value={[size,stocks]}
-        label="Talle"
-        onChange={handleChange}
-      >
-        {/* <MenuItem value={10}>xs</MenuItem>
-        <MenuItem value={20}>S</MenuItem>
-        <MenuItem value={30}>M</MenuItem>
-        <MenuItem value={30}>L</MenuItem>
-        <MenuItem value={30}>XL</MenuItem> */}
-        {Object.entries(medidas).map(([variante, value])=> (
-        <MenuItem key={variante} value={[variante,value]}>{variante}</MenuItem>))}
-      </Select>
-    </FormControl>
-    <p>Stock:  {stocks}</p>
-        {/* <FilterContainer>
-          <Filter>
-            <FilterTitle>Talle</FilterTitle>
-            {listproduct.categoria === "Zapatillas" ?
-              <FilterSize>
-                <FilterSizeOption>38</FilterSizeOption>
-                <FilterSizeOption>39</FilterSizeOption>
-                <FilterSizeOption>40</FilterSizeOption>
-                <FilterSizeOption>41</FilterSizeOption>
-                <FilterSizeOption>42</FilterSizeOption>
-                <FilterSizeOption>43</FilterSizeOption>
-                <FilterSizeOption>44</FilterSizeOption>
-                <FilterSizeOption>45</FilterSizeOption>
-              </FilterSize> :
-              <FilterSize>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
-                <FilterSizeOption>XXL</FilterSizeOption>
-              </FilterSize>
-            }
-          </Filter>
-        </FilterContainer> */}
-        <Box sx={{ width: "50%", margin: "0 auto" }}>
-          {stocks<1?
-          "SIN STOCK":
-          <ItemCount initial={1} stock={stocks} onAdd={onAdd} enCarrito={enCarrito} />}
-        </Box>
-
-      </Box>
-    </Container>
+      <DataContainer sx={{margin:"200px auto"}}>
+            <Title>{listproduct.title}</Title>
+            <Desc>
+              {listproduct.description2}
+            </Desc>
+            <Price>Precio: ${listproduct.price}</Price>
+            <div>
+            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <InputLabel id="demo-simple-select-autowidth-label">Talle</InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            value={medidas.length ? [size,stocks] : ""}
+            label="Talle"
+            onChange={handleChange}
+          >
+            {Object.entries(medidas).map(([variante, value])=> (
+            <MenuItem key={variante} value={[variante,value]}>{variante}</MenuItem>))}
+          </Select>
+        </FormControl>
+        </div>
+        {!show ? 
+        <h2>elija un talle</h2>
+        : stocks > 1 ?  
+            <Box sx={{ width: "50%", margin: "0 auto" }}>
+              <p>Talle: {size}</p>
+              <p>Stock: {stocks}</p>
+              <ItemCount initial={1} stock={stocks} onAdd={onAdd} enCarrito={enCarrito} />
+            </Box>
+        : "Sin Stock"}
+      </DataContainer>      
+    </Stack>
+    </>
   )
 }
 
-
+const H1 = styled.h1`
+  text-align:center;
+  color: white;
+`;
 
 const Image = styled.img`
-  width: 40%;
+  width: 100%;
   margin: 10px 5px;
 `;
 
@@ -135,32 +127,7 @@ const Price = styled.span`
   font-size: 40px;
 `;
 
-const FilterContainer = styled.div`
-margin: 10px;
- 
+const DataContainer = styled.div`
+margin: 15px;
+text-align:center;
 `;
-
-const Filter = styled.div`
-`;
-
-const FilterTitle = styled.span`
-  font-size: 20px;
-  font-weight: 200;
-  color: white;
-`;
-
-// const FilterColor = styled.div`
-//   width: 20px;
-//   height: 20px;
-//   border-radius: 50%;
-//   background-color: ${(props) => props.color};
-//   margin: 0px 5px;
-//   cursor: pointer;
-// `;
-
-const FilterSize = styled.select`
-  margin-left: 10px;
-  padding: 5px;
-`;
-
-const FilterSizeOption = styled.option``;

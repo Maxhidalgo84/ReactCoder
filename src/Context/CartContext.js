@@ -11,9 +11,7 @@ const CartContextProvider = ({ children }) => {
     }
 
     const [cart, setCart] = useState(cartLocal);
-    const [talle, setTalle] = useState("");
-
-    
+        
     const isInCart = (id) => cart.find(item => item.id === id);
     
     const addItem = (producto, quantity,size) => {
@@ -39,10 +37,6 @@ const CartContextProvider = ({ children }) => {
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
-    const choiceTalle = (talle) => {
-        setTalle(talle)
-    }
-
     const removeItem = (id) => {
         setCart(cart.filter(item => item.id !== id));
     }
@@ -61,7 +55,7 @@ const CartContextProvider = ({ children }) => {
 
 
     return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, reset, totalPrice, totalQuantity, choiceTalle }}>
+        <CartContext.Provider value={{ cart, addItem, removeItem, reset, totalPrice, totalQuantity }}>
             {children}
         </CartContext.Provider>
     );
