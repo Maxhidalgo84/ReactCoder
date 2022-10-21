@@ -1,6 +1,6 @@
 <h1 align="center"> Ecommerce Productos de Jordan </h1>
 
-Descripción de su proyecto: Desarrollo de una pagina web de ecommerce de Bicicletas, con carrito incluido, y api de mercado pagos, realizada en javascript.
+Descripción de su proyecto: Desarrollo de una pagina web de ecommerce de productos de Jordan, con carrito incluido realizada en React.
 
 ![una muestra de la pagina]()
 
