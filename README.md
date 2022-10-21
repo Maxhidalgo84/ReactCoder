@@ -2,7 +2,7 @@
 
 Descripción de su proyecto: Desarrollo de una pagina web de ecommerce de productos de Jordan, con carrito incluido realizada en React.
 
-![una muestra de la pagina]()
+![una muestra de la pagina](https://github.com/Maxhidalgo84/ReactCoder/blob/main/MX%20Productos%20Jordan.gif)
 
 >Link del proyecto: [Ir a la tienda]()
 
