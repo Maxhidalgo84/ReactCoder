@@ -8,44 +8,108 @@ import Box from '@mui/material/Box';
 import CartWidget from "./CartWidget";
 import Container from '@mui/material/Container';
 import { Link } from "react-router-dom";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
 
-
-const navItems = [
+const pages = [
     { id: 0, nombre: 'Zapatillas', ruta: "/categoria/Zapatillas" },
     { id: 1, nombre: 'Remeras', ruta: "/categoria/Remeras" },
     { id: 2, nombre: 'Buzos', ruta: "/categoria/Buzos" },
 ]
 
 export default function NavBar({ titulo }) {
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
 
     return (
-        <AppBar position="static" style={styles.appBar}>
+        <AppBar sx={{ background: "white" }} position="static">
             <Container maxWidth="xl">
-                <Toolbar style={styles.toolbar}>
-                    <IconButton edge="start" style={styles.menuButton} color="inherit" aria-label="menu">
+                <Toolbar disableGutters>
+                    <IconButton>
                         <Link to="/"><img style={styles.img} src={logojordan} alt="jordan" title="HOME" /></Link>
                     </IconButton>
-                    <div style={styles.banner}>
+                    <Typography
+                        sx={{
+                            display: { xs: "none", md: "flex" }, color: "black", fontSize: "1.5rem",
+                            textAlign: "center",
+                            marginLeft: "10%",
+                            marginRight: "10%",
+                        }}>
                         {titulo}
-
-                    </div>
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        {navItems.map((item) => (
-                            <Button key={item.id}>
-                                <Link to={item.ruta} style={styles.link}>{item.nombre}</Link>
-                            </Button>
+                    </Typography>
+                    <Box sx={{ justifyContent: { xs: "flex-end" }, flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenNavMenu}
+                            color="default"
+                        >
+                            <Typography>Menu</Typography>
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "rigth"
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "rigth"
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                display: { xs: "block", md: "block" }
+                            }}
+                        >
+                            {pages.map((page) => (
+                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                    <Link to={page.ruta} style={styles.link}>{page.nombre}</Link>
+                                </MenuItem>
+                            ))}
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Link to="/vercompra" style={styles.link}>Ver Compra</Link>
+                            </MenuItem>
+                        </Menu>
+                    </Box>
+                    <Box sx={{ flexGrow: 1, justifyContent: { xs: "flex-end" }, alignItems:"center", display: { xs: "none", md: "flex" } }}>
+                        {pages.map((page) => (
+                            <Link key={page} to={page.ruta} style={styles.link}>
+                                <Button
+                                    key={page}
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ color: "black", display: "block" }}>
+                                        {page.nombre}
+                                </Button>      
+                            </Link>
                         ))}
-                        <Button>
-                            <Link to="/vercompra" style={styles.link}>Ver Compra</Link>
-                        </Button>
+                        <Link to="/vercompra" style={styles.link}>
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{  color: "black", display: "block", fontSize: "0.6rem" }}>
+                                    Ver Compra
+                            </Button>      
+                        </Link>
                     </Box>
                     <Link to="/cart"><CartWidget /></Link>
                 </Toolbar>
             </Container>
         </AppBar>
-
-    )
+    );
 }
+
 
 
 const styles = {
@@ -73,11 +137,12 @@ const styles = {
         marginRight: "10%",
     },
     img: {
-        maxWidth: 100,
+        maxWidth: 150,
         height: "2rem",
     },
 
     link: {
+        
         color: "black",
         textDecoration: "none",
     },

@@ -37,9 +37,10 @@ export const CartForm = () => {
     const [alert3, setAlert3] = useState(false);
 
 
-    const validateEmail = (email) => {
-        return email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); 
-    };
+    const validateEmail = (email) =>
+        // eslint-disable-next-line
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+
 
     const finalizarCompra = (buyer, items) => {
         setComplete(true);
@@ -51,26 +52,27 @@ export const CartForm = () => {
             date: serverTimestamp(),
             total: totalPrice()
         })
-            .then(res=>{ setIdVenta(res.id);
-                items.forEach(producto =>{ 
-                    actStock(producto,producto.size)
+            .then(res => {
+                setIdVenta(res.id);
+                items.forEach(producto => {
+                    actStock(producto, producto.size)
                 });
             })
 
     }
 
-    const actStock = (producto,talle) =>{
-        const refDoc = doc(db,"products", producto.id);
+    const actStock = (producto, talle) => {
+        const refDoc = doc(db, "products", producto.id);
         getDoc(refDoc)
-        .then((data)=>{
-            let updateStock = data;
-            let tallesupd= updateStock.get("talles");
-            tallesupd[talle] = tallesupd[talle] - producto.quantity;
-            updateDoc(refDoc,{talles:(tallesupd)});
-        })
-        .catch(() =>{
-            console.log("error lerr articulo");
-        })    
+            .then((data) => {
+                let updateStock = data;
+                let tallesupd = updateStock.get("talles");
+                tallesupd[talle] = tallesupd[talle] - producto.quantity;
+                updateDoc(refDoc, { talles: (tallesupd) });
+            })
+            .catch(() => {
+                console.log("error leer articulo");
+            })
     }
 
 
@@ -97,17 +99,17 @@ export const CartForm = () => {
         } else if ((!validateEmail(buyer.email))) {
             setAlert2(true);
             return;
-        } else if(buyer.email!== buyer.email2){
+        } else if (buyer.email !== buyer.email2) {
             setAlert3(true);
             return;
-        }finalizarCompra(buyer, cart)
+        } finalizarCompra(buyer, cart)
 
     }
 
     return (
         <div>
-            <Button 
-                sx={{margin:"15px"}}
+            <Button
+                sx={{ margin: "15px" }}
                 variant="contained" color="success"
                 onClick={handleClickOpen}
 
@@ -116,7 +118,7 @@ export const CartForm = () => {
             </Button>
 
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle sx={{textAlign:"center"}}>
+                <DialogTitle sx={{ textAlign: "center" }}>
                     Formulario de Compra
                 </DialogTitle>
                 {alert ? (
@@ -124,21 +126,21 @@ export const CartForm = () => {
                         Nombre, Dirección y Email son datos obligatorios
                     </Alert>
                 ) :
-                alert3?(
-                    <Alert variant="filled" severity="error">
-                        Los campos email no coinciden
-                    </Alert>
-                ) :
-                alert2 ? (
-                    <Alert variant="filled" severity="error">
-                        No has ingresado un correo valido
-                    </Alert>
-                ) : 
-                complete ? (
-                    <Alert variant="filled" severity="success">
-                        Compra realizada con exito su id es: <p>{idVenta}</p>
-                    </Alert>
-                ):<DialogContentText sx={{textAlign:"center"}}>Por favor ingrese los datos para confirmar la compra</DialogContentText>}
+                    alert3 ? (
+                        <Alert variant="filled" severity="error">
+                            Los campos email no coinciden
+                        </Alert>
+                    ) :
+                        alert2 ? (
+                            <Alert variant="filled" severity="error">
+                                No has ingresado un correo valido
+                            </Alert>
+                        ) :
+                            complete ? (
+                                <Alert variant="filled" severity="success">
+                                    Compra realizada con exito su id es: <p>{idVenta}</p>
+                                </Alert>
+                            ) : <DialogContentText sx={{ textAlign: "center" }}>Por favor ingrese los datos para confirmar la compra</DialogContentText>}
                 <DialogContent>
                     <TextField
                         autoFocus
@@ -178,7 +180,10 @@ export const CartForm = () => {
                     />
                     <TextField
                         autoFocus
-                        onFocus={() => setAlert(false)}
+                        onFocus={() =>{setAlert(false)
+                                       setAlert2(false)
+                                       setAlert3(false)  }
+                        }
                         margin="dense"
                         id="email"
                         name="email"
@@ -189,9 +194,11 @@ export const CartForm = () => {
                         helperText="Se enviara la informacion a este correo"
                         onChange={handlerOnChange}
                     />
-                     <TextField
+                    <TextField
                         autoFocus
-                        onFocus={() => setAlert(false)}
+                        onFocus={() => {setAlert(false)
+                                        setAlert3(false)  }
+                        }
                         margin="dense"
                         id="email2"
                         name="email2"
@@ -206,15 +213,15 @@ export const CartForm = () => {
 
 
                 <DialogActions>
-                    <Button  variant="contained" color="error" onClick={handleClose}>
+                    <Button variant="contained" color="error" onClick={handleClose}>
                         {complete ? 'CERRAR' : 'CANCELAR'}
                     </Button>
                     {finish ? <Button variant="contained" color="success" onClick={handleConfirm}>CONFIRMAR
-                       
-                    </Button>: 
-                    <Link to={`/`} style={{ textDecoration: 'none', margin:"0px 10px" }}>
-                        <Button onClick={handleClose} variant="contained" color="primary"> Seguir Comprando</Button>
-                    </Link>}
+
+                    </Button> :
+                        <Link to={`/`} style={{ textDecoration: 'none', margin: "0px 10px" }}>
+                            <Button onClick={handleClose} variant="contained" color="primary"> Seguir Comprando</Button>
+                        </Link>}
                 </DialogActions>
             </Dialog>
         </div>

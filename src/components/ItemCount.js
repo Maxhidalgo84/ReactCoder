@@ -36,7 +36,7 @@ const ItemCount = ({ initial, stock, onAdd, enCarrito }) => {
                             <AddIcon color="primary" onClick={sumar} />
                         </Box>
                     </div>
-                    <Button variant="contained" color="primary" onClick={agregarCarrito}>Agregar al carrito</Button>
+                    <Button sx={{fontSize:{xs: "0.7rem",md:"0.8rem"}}} variant="contained" color="primary" onClick={agregarCarrito}>Agregar al carrito</Button>
                 </>}
         </Container>
 

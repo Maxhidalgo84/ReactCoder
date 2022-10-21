@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react'
 //import productos from './Productos/ProducData'
-import { ItemDetail } from './Productos/ItemDetail'
+import { ItemDetail } from './ItemDetail'
 import CircularProgress from '@mui/material/CircularProgress';
 import { useParams } from 'react-router-dom';
-import { db } from "../Firebase/Firebase";
+import { db } from "../../Firebase/Firebase";
 import { getDoc, collection, doc } from 'firebase/firestore';
 
-
-
-// const promesa = new Promise((res) => {
-//     res(productos)
-// })
 
 export const ItemDetailContainer = () => {
 
@@ -41,16 +36,6 @@ export const ItemDetailContainer = () => {
         })
     }, [id])
     
-
-    // useEffect(() => {
-    //     let timer = setTimeout(() => {
-    //         setShow(true)
-    //         promesa
-    //             .then((res) => { setListProduct(res.find(item => item.id === parseInt(id))) })
-    //     }, 1000);
-
-    //     return () => clearTimeout(timer)
-    // }, [id]);
 
     return (
         <>

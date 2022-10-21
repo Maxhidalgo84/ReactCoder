@@ -1,12 +1,12 @@
 import React from 'react'
-import { useCartContext } from '../Context/CartContext'
+import { useCartContext } from '../../Context/CartContext'
 import { Box, Button } from '@mui/material'
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { CartForm } from './CartForm';
+import { CartForm } from '../../components/CartForm';
 
 export const Cart = () => {
 
@@ -43,7 +43,7 @@ export const Cart = () => {
             <h2>Cantidad de Productos: {totalQuantity()}</h2>
             <h2>TOTAL: ${totalPrice()}</h2>
             <Button variant="contained" color="error" onClick={reset}>Vaciar Carrito</Button>
-            <CartForm/>
+            <CartForm />
           </Box>}
       </Stack>
     </>
