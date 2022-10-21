@@ -134,5 +134,8 @@ const Price = styled.span`
   font-weight: 100;
   color:white;
   font-size: 40px;
+  @media (max-width:360px){
+    font-size:1rem;
+  }
 `;
 
