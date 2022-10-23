@@ -29,6 +29,7 @@ export const ListBuy = () => {
         setConfirmar(false)
     }
 
+    // guardo las ventas en firestore y devuelvo un id de compra.
     const finalizar = () => {
         setLoading(true)
         const ventasCollection = collection(db, "ventas");

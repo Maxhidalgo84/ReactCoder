@@ -61,6 +61,7 @@ export const CartForm = () => {
 
     }
 
+    //actualizo stock en firestore
     const actStock = (producto, talle) => {
         const refDoc = doc(db, "products", producto.id);
         getDoc(refDoc)
@@ -92,6 +93,7 @@ export const CartForm = () => {
         }
     };
 
+    //validacion del form
     const handleConfirm = () => {
         if (buyer.address === "" || buyer.name === "" || buyer.email === "" || buyer.email2 === "") {
             setAlert(true);

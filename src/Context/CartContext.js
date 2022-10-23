@@ -17,7 +17,7 @@ const CartContextProvider = ({ children }) => {
     const addItem = (producto, quantity,size) => {
         if (isInCart(producto.id)) {
             const  newCart = cart.map(item => {
-                if(item.id === producto.id ){
+                if(item.id === producto.id){
                 const newQuantity = item.quantity + quantity;
                 return {...item, quantity: newQuantity}
                 } else {
@@ -27,8 +27,7 @@ const CartContextProvider = ({ children }) => {
             setCart(newCart)
         } else {
             const newProducto= {...producto, size:size, quantity: quantity};
-            setCart([...cart, newProducto])
-            console.log(cart);
+            setCart([...cart, newProducto]);
 
         }
     };

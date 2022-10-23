@@ -14,7 +14,7 @@ const ItemListContainer = ({ greeting }) => {
     const [error, setError] = useState(false);
 
     const { categoria } = useParams()
-
+    
     useEffect(() => {
         const productsCollection = collection(db, "products");
         const q = categoria ? query(productsCollection, where("categoria", "==", `${categoria}`)) :
@@ -47,7 +47,7 @@ const ItemListContainer = ({ greeting }) => {
             <H2>{categoria}</H2>
             {show ? <ItemList listproducts={listproducts} />
                 : error ? <p>error</p>
-                    : <CircularProgress sx={{ margin: "10% auto", display: "flex", alignItems: "center", justifyContent: "center" }} />}
+                    : <CircularProgress sx={{ margin: "10% auto", display: "flex", alignItems: "center", justify: "center" }} />}
         </>
     )
 }

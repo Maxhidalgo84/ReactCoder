@@ -61,21 +61,21 @@ export default function NavBar({ titulo }) {
                             anchorEl={anchorElNav}
                             anchorOrigin={{
                                 vertical: "bottom",
-                                horizontal: "rigth"
+                                horizontal: "left"
                             }}
                             keepMounted
                             transformOrigin={{
                                 vertical: "top",
-                                horizontal: "rigth"
+                                horizontal: "left"
                             }}
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: "block", md: "block" }
+                                display: { xs: "block", md: "none" }
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page.id}  onClick={handleCloseNavMenu}>
                                     <Link to={page.ruta} style={styles.link}>{page.nombre}</Link>
                                 </MenuItem>
                             ))}
@@ -84,11 +84,10 @@ export default function NavBar({ titulo }) {
                             </MenuItem>
                         </Menu>
                     </Box>
-                    <Box sx={{ flexGrow: 1, justifyContent: { xs: "flex-end" }, alignItems:"center", display: { xs: "none", md: "flex" } }}>
+                    <Box sx={{justifyContent:{ xs: "flex-end" }, flexGrow: 1,  alignItems:"center", display: { xs: "none", md: "flex" } }}>
                         {pages.map((page) => (
-                            <Link key={page} to={page.ruta} style={styles.link}>
+                            <Link key={page.id} to={page.ruta} style={styles.link}>
                                 <Button
-                                    key={page}
                                     onClick={handleCloseNavMenu}
                                     sx={{ color: "black", display: "block" }}>
                                         {page.nombre}
@@ -125,10 +124,7 @@ const styles = {
         boxShadow: "none",
         color: "black",
     },
-    toolbar: {
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
+  
 
     banner: {
         fontSize: "1.5rem",
