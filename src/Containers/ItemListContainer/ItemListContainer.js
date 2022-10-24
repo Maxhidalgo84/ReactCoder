@@ -59,7 +59,7 @@ const H1 = styled.h1`
     text-align:center;
     color: white;
     @media (max-width: 560px) {
-    font-size:20px;
+    font-size:1rem;
 }
 `;
 

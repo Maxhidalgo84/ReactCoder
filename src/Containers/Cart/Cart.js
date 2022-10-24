@@ -60,12 +60,18 @@ const Image = styled.img`
 const H1 = styled.h1`
   text-align:center;
   color: white;
+  @media (max-width: 560px) {
+    font-size:20px;
+}
 `;
 
 const H2 = styled.h2`
   text-align:center;
   color: white;
   margin: 10px;
+  @media (max-width: 560px) {
+    font-size:20px;
+}
 `;
 
 const Title = styled.h2`
