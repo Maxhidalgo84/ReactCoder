@@ -4,13 +4,13 @@ Descripción de su proyecto: Desarrollo de una pagina web de ecommerce de produc
 
 ![una muestra de la pagina](https://github.com/Maxhidalgo84/ReactCoder/blob/main/MX%20Productos%20Jordan.gif)
 
->Link del proyecto: [Ir a la tienda]()
+>Link del proyecto: [Ir a la tienda](https://finalreactcoder.netlify.app/)
 
 Cómo pueden usarlo los usuarios: Se puede aplicar para otros rubros, generando un ecommerce para otros rubros de productos o servicios. 
 
 Funcionalidades: <ul>
                    <li>Catalogo de productos</li>
-                   <li>Categoria de productis</li>
+                   <li>Categoria de productos</li>
                    <li>Carrito de compras</li>
                    <li>Buscador de compras</li>
                  <ul>
