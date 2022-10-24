@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+<h1 align="center"> Ecommerce Productos de Jordan </h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Descripción de su proyecto: Desarrollo de una pagina web de ecommerce de productos de Jordan, con carrito incluido realizada en React.
 
-## Available Scripts
+![una muestra de la pagina](https://github.com/Maxhidalgo84/ReactCoder/blob/main/MX%20Productos%20Jordan.gif)
 
-In the project directory, you can run:
+>Link del proyecto: [Ir a la tienda]()
 
-### `npm start`
+Cómo pueden usarlo los usuarios: Se puede aplicar para otros rubros, generando un ecommerce para otros rubros de productos o servicios. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Funcionalidades: <ul>
+                   <li>Catalogo de productos</li>
+                   <li>Categoria de productis</li>
+                   <li>Carrito de compras</li>
+                   <li>Buscador de compras</li>
+                 <ul>
+## Componentes
+Aca un resumen de los componentes que utilice: 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* NavBar  donde se realizo la barra de navegación, la misma maneja las búsquedas con el router
+* itemsInListContainer aca se encuentra el listado de los items que se muestran en pantalla, se generan las card de cada uno en Item y se filtran los productos destacados o por categoria..
+* ItemsinDetail amplía cada producto y brinda información detalladada al respecto, se pueden agregar los productos al carrito, ver el stock disponible.
+*Cart: Se muestran los productos que van al carrito, detallando la cantidad, talle, precio total y luego al finalizar la compra se despliega un formulario de venta.
 
-### `npm test`
+## Caracteristicas y herramientas:
+#### Librerias
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `Icons Material:`
+    - Para la utilización de iconos como DeleteIcon por ejemplo
+    
+- `Sweet Alert 2:`
+    - Para crear alerts con mejor apariencia y utilidad, como al momento de realizar una compra, o dar aviso de algo al usuario.
+    
+- `React-router-dom:`
+    - Se utliza para realizar la navegacion dentro de la pagina, creando rutas para identificar cada seccion, utilizando  **Link, Navigate, NavLink, etc.** 
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `Storage:`
+    Para guardar los productos del carrito.   
+    
+- `Firebase:`
+    - **FireStore:**
+    Se realizo la base de datos en Firestore, donde tenemos almacenados por un lado todos los productos cada uno con su id, detalle como ser imagenes, precio, titulo, descripcion, etc,. Se pueden realizar consultas para traernos los productos filtrando por categoria o por id de producto, asi como tambien se guardan las ventas realizadas para mostrar todo de forma dinamica dentro de la aplicación.  
+  
+   
+### Diseño
+- Toda la app esta diseñada y maquetada con ***Material UI***
