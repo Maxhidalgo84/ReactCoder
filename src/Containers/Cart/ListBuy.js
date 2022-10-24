@@ -83,7 +83,7 @@ export const ListBuy = () => {
                 {loading ?
                     <CircularProgress sx={{ margin: "10% auto", display: "flex", alignItems: "center", justifyContent: "center" }} />
                     : show ? < SeeBuy ventas={ventas} />
-                        : confirmar && !show ? <h2>no se han encontrado ventas para ese id</h2> : <h2>Ingrese id para ver su compra</h2>}
+                        : confirmar && !show ? <H2>no se han encontrado ventas para ese id</H2> : <H2>Ingrese id para ver su compra</H2>}
             </Container>
         </>
     )
@@ -91,8 +91,15 @@ export const ListBuy = () => {
 
 
 const H1 = styled.h1`
-  font-weight: 300;
-  text-align:center;
-  color:white;
+    font-weight: 300;
+    text-align:center;
+    color:white;
 `;
 
+const H2 = styled.h2`
+    text-align:center;
+    margin: 10px;
+    @media (max-width: 560px) {
+    font-size:1rem;
+}
+`;
