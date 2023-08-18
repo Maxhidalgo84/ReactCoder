@@ -6,7 +6,7 @@ Descripción de su proyecto: Desarrollo de una pagina web de ecommerce de produc
 
 >Link del proyecto: [Ir a la tienda](https://finalreactcoder.netlify.app/)
 
-Cómo pueden usarlo los usuarios: Se puede aplicar para otros rubros, generando un ecommerce para otros rubros de productos o servicios. 
+Cómo pueden usarlo los usuarios: Se puede aplicar para otros rubros, generando un ecommerce de productos o servicios. 
 
 Funcionalidades: <ul>
                    <li>Catalogo de productos</li>
